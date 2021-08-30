@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const TrafficLight = () => {
+
+    const [selected, setSelected] = useState('');
+
     const trafficLightStyle = {
         alignItems: "center",
         background: "black",
@@ -24,21 +27,23 @@ export const TrafficLight = () => {
             background: color
         }
     }
-    
-    const handleLight = (event) => {
-        event.target.style.boxShadow = selected.boxShadow;
-    };
-    
-    const selected = {
-        boxShadow: "0 0 20px 15px rgb(255 255 255)"
+
+    const selectedColor = {
+        boxShadow: "0 0 20px 15px rgb(255 255 150)"
     }
 
     return (
         <div style={ trafficLightStyle }>
             {
-                lightsArray.map( light => {
-                    return <div key={ light } style={ styleCircle(light) } onClick={ handleLight }></div>
-                })
+                lightsArray.map( light => (
+                    <div 
+                        key={ light } 
+                        style={ { ...styleCircle(light), ...(selected === light ? selectedColor : null) } } 
+                        onClick={ ()=> {
+                            setSelected(light) } }
+                    >
+                    </div>
+                ))
             }
         </div>
     )
