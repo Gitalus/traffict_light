@@ -28,8 +28,10 @@ export const TrafficLight = () => {
         }
     }
 
-    const selectedColor = {
-        boxShadow: "0 0 20px 15px rgb(255 255 150)"
+    const selectedColor = (color) => {
+        return {
+            boxShadow: `0 0 20px 15px ${color}`,
+        }
     }
 
     return (
@@ -38,7 +40,7 @@ export const TrafficLight = () => {
                 lightsArray.map( light => (
                     <div 
                         key={ light } 
-                        style={ { ...styleCircle(light), ...(selected === light ? selectedColor : null) } } 
+                        style={ { ...styleCircle(light), ...(selected === light ? selectedColor(light) : null) } } 
                         onClick={ ()=> {
                             setSelected(light) } }
                     >
